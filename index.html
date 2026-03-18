@@ -1,151 +1,241 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wemert Group Realty</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background-color: #f2f4f7;
-    }
-    header {
-      background-color: #0a2a66;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-    .container {
-      padding: 15px;
-    }
-    .search-box {
-      background: white;
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-    }
-    .search-box input,
-    .search-box button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 10px;
-      font-size: 16px;
-    }
-    .search-box button {
-      background-color: #0a2a66;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    .listings {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 15px;
-    }
-    .card {
-      background: white;
-      border-radius: 8px;
-      padding: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    .card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 6px;
-    }
-    .card button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      background-color: #0a2a66;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    footer {
-      background-color: #0a2a66;
-      color: white;
-      text-align: center;
-      padding: 15px;
-      margin-top: 25px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wemert Group Realty</title>
+
+<style>
+:root {
+  --primary: #1e3a8a;
+  --secondary: #f59e0b;
+  --accent: #10b981;
+  --bg: #f4f6f8;
+  --text: #1f2937;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* HEADER */
+header {
+  background: linear-gradient(135deg, var(--primary), #2563eb);
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 26px;
+}
+
+header p {
+  margin: 6px 0 0;
+  font-size: 14px;
+}
+
+/* SEARCH */
+.search-box {
+  background: white;
+  margin: -30px auto 20px;
+  padding: 20px;
+  max-width: 700px;
+  border-radius: 16px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.search-box select, 
+.search-box button {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 15px;
+}
+
+.search-box button {
+  background: var(--secondary);
+  color: white;
+  border: none;
+  font-weight: bold;
+}
+
+/* LISTINGS */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 15px;
+}
+
+.card {
+  background: white;
+  border-radius: 18px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+}
+
+.card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 16px;
+}
+
+.price {
+  font-size: 22px;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+.address {
+  margin: 6px 0;
+  font-weight: 600;
+}
+
+.meta {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.buttons a {
+  flex: 1;
+  text-align: center;
+  padding: 12px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.btn-details { background: var(--primary); }
+.btn-call { background: var(--secondary); }
+.btn-email {
+  background: var(--accent);
+  margin-top: 10px;
+  display: block;
+  text-align: center;
+  padding: 12px;
+  border-radius: 12px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* FOOTER */
+footer {
+  background: #111827;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+</style>
 </head>
-<body><header>
+
+<body>
+
+<header>
   <h1>Wemert Group Realty</h1>
-  <p>Affordable Homes Across Orlando, Florida</p>
-</header><div class="container">  <div class="search-box">
-    <h2>Search Homes</h2>
-    <input type="number" id="price" placeholder="Maximum Price ($)">
-    <input type="number" id="bedrooms" placeholder="Minimum Bedrooms">
-    <button onclick="searchHomes()">Search Homes</button>
-  </div>  <div class="listings" id="listings"></div></div><footer>
-  <p><strong>Wemert Group Realty</strong></p>
-  <p>Email: jwemertgrouprealty1@gmail.com</p>
-  <p>Phone: 407-435-5072</p>
-</footer><script>
-  const homes = [
-    {
-      price: 185000,
-      bedrooms: 2,
-      image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be",
-      description: "2 Bedroom Condo – Downtown Orlando"
-    },
-    {
-      price: 225000,
-      bedrooms: 3,
-      image: "https://images.unsplash.com/photo-1568605114967-8130f3a36994",
-      description: "3 Bedroom Family Home – Kissimmee Area"
-    },
-    {
-      price: 260000,
-      bedrooms: 4,
-      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
-      description: "4 Bedroom Home – East Orlando"
-    },
-    {
-      price: 195000,
-      bedrooms: 2,
-      image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914",
-      description: "Modern Apartment – South Orlando"
-    }
-  ];
+  <p>Your Trusted Orlando Real Estate Partner</p>
+  <p>📞 407-435-5072 | ✉️ jwemertgrouprealty1@gmail.com</p>
+</header>
 
-  function displayHomes(list) {
-    const listings = document.getElementById("listings");
-    listings.innerHTML = "";
+<div class="search-box">
+  <select>
+    <option>All Orlando Areas</option>
+    <option>Downtown Orlando</option>
+    <option>Winter Park</option>
+    <option>Lake Nona</option>
+  </select>
 
-    list.forEach(home => {
-      listings.innerHTML += `
-        <div class="card">
-          <img src="${home.image}" alt="House in Orlando">
-          <p>${home.description}</p>
-          <strong>$${home.price.toLocaleString()}</strong>
-          <button onclick="contact()">Buy / Inquire</button>
-        </div>
-      `;
-    });
-  }
+  <select>
+    <option>Any Price</option>
+    <option>Under $300,000</option>
+    <option>$300,000 - $500,000</option>
+  </select>
 
-  function searchHomes() {
-    const maxPrice = document.getElementById("price").value;
-    const minBedrooms = document.getElementById("bedrooms").value;
+  <select>
+    <option>Any Bedrooms</option>
+    <option>2 Bedrooms</option>
+    <option>3 Bedrooms</option>
+    <option>4+ Bedrooms</option>
+  </select>
 
-    const filtered = homes.filter(home =>
-      (!maxPrice || home.price <= maxPrice) &&
-      (!minBedrooms || home.bedrooms >= minBedrooms)
-    );
+  <button>🔍 Search Properties</button>
+</div>
 
-    displayHomes(filtered);
-  }
+<div class="container grid">
 
-  function contact() {
-    alert("Thank you for your interest! We will contact you shortly via email.");
-  }
+  <!-- HOUSE 1 -->
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Orlando Home">
+    <div class="card-body">
+      <div class="price">$285,000</div>
+      <div class="address">123 Magnolia Ave – Downtown Orlando</div>
+      <div class="meta">3 Bed • 2 Bath • 1,850 sqft</div>
+      <div class="buttons">
+        <a class="btn-details" href="#">Details</a>
+        <a class="btn-call" href="tel:4074355072">Call</a>
+      </div>
+      <a class="btn-email" href="mailto:jwemertgrouprealty1@gmail.com?subject=Home Inquiry">
+        📧 Email About This Home
+      </a>
+    </div>
+  </div>
 
-  displayHomes(homes);
-</script></body>
+  <!-- HOUSE 2 -->
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1572120360610-d971b9b78826" alt="Winter Park Home">
+    <div class="card-body">
+      <div class="price">$425,000</div>
+      <div class="address">456 Park Avenue – Winter Park</div>
+      <div class="meta">4 Bed • 3 Bath • 2,400 sqft</div>
+      <div class="buttons">
+        <a class="btn-details" href="#">Details</a>
+        <a class="btn-call" href="tel:4074355072">Call</a>
+      </div>
+      <a class="btn-email" href="mailto:jwemertgrouprealty1@gmail.com?subject=Home Inquiry">
+        📧 Email About This Home
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  © 2026 Wemert Group Realty • Orlando, FL<br>
+  Email: jwemertgrouprealty1@gmail.com | Phone: 407-435-5072
+</footer>
+
+</body>
 </html>
