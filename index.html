@@ -6,98 +6,120 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --primary:#1f3c88;
-  --secondary:#f4a300;
-  --accent:#22b573;
-  --bg:#f4f6f9;
+  --primary:#0f2a44;
+  --accent:#2563eb;
+  --success:#16a34a;
+  --warning:#f59e0b;
+  --bg:#f3f6fb;
 }
 *{box-sizing:border-box}
-body{margin:0;font-family:'Inter',sans-serif;background:var(--bg);color:#222}
-header{background:linear-gradient(135deg,var(--primary),#2954c7);color:#fff;padding:22px;text-align:center}
+body{margin:0;font-family:'Inter',sans-serif;background:var(--bg);color:#111827}
+header{background:linear-gradient(135deg,var(--primary),#1e40af);color:#fff;padding:26px;text-align:center}
 header h1{margin:0;font-size:26px}
-header p{margin:6px 0 0;font-size:14px}
-.top-contact{font-size:14px;margin-top:8px}
-.container{padding:16px;max-width:1200px;margin:auto}
-.search-box{background:#fff;border-radius:14px;padding:18px;box-shadow:0 6px 18px rgba(0,0,0,.08);margin-bottom:22px}
-.search-box h2{margin-top:0}
+header p{margin:6px 0 0;font-size:14px;opacity:.95}
+.contact-top{margin-top:8px;font-size:14px}
+.container{max-width:1200px;margin:auto;padding:16px}
+.search-box{background:#fff;border-radius:16px;padding:18px;box-shadow:0 10px 30px rgba(0,0,0,.08);margin-bottom:24px}
+.search-box h2{margin:0 0 12px}
 .filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
-.filters select,.filters button{padding:12px;border-radius:10px;border:1px solid #ddd;font-size:15px}
-.filters button{background:var(--secondary);color:#fff;border:none;font-weight:600;cursor:pointer}
-.listings{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
-.card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 8px 20px rgba(0,0,0,.1)}
-.card img{width:100%;height:210px;object-fit:cover}
-.badge{position:absolute;background:var(--secondary);color:#fff;padding:6px 10px;border-radius:20px;font-size:12px;margin:10px}
-.card-content{padding:16px}
-.price{font-size:22px;font-weight:700;color:var(--primary)}
+.filters select,.filters button{padding:12px;border-radius:10px;border:1px solid #e5e7eb;font-size:15px}
+.filters button{background:var(--accent);color:#fff;border:none;font-weight:600;cursor:pointer}
+.listings{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 12px 28px rgba(0,0,0,.12);display:flex;flex-direction:column}
+.card img{width:100%;height:220px;object-fit:cover}
+.card-content{padding:16px;flex:1}
+.price{font-size:22px;font-weight:700;color:var(--accent)}
 .address{font-weight:600;margin:6px 0}
-.meta{display:flex;gap:14px;font-size:14px;margin:10px 0;color:#555}
+.meta{display:flex;gap:14px;font-size:14px;margin:10px 0;color:#4b5563;flex-wrap:wrap}
 .actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
 .actions a{display:block;text-align:center;padding:12px;border-radius:10px;text-decoration:none;font-weight:600}
 .details{background:var(--primary);color:#fff}
-.call{background:var(--secondary);color:#fff}
-.email{grid-column:1/3;background:var(--accent);color:#fff}
-footer{background:var(--primary);color:#fff;text-align:center;padding:20px;margin-top:30px;font-size:14px}
+.call{background:var(--success);color:#fff}
+.meet{grid-column:1/3;background:var(--warning);color:#fff}
+footer{background:var(--primary);color:#fff;text-align:center;padding:22px;margin-top:40px;font-size:14px}
+@media(max-width:640px){.actions{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <header>
-<h1>Wemert Group Realty</h1>
-<p>Your Trusted Orlando Real Estate Partner</p>
-<div class="top-contact">📞 407-435-5072 | ✉️ jwemertgrouprealty1@gmail.com</div>
-</header>
-<div class="container">
-<div class="search-box">
-<h2>Find Your Dream Home in Orlando</h2>
-<div class="filters">
-<select id="price">
-<option value="">Any Price</option>
-<option value="200000">Up to $200k</option>
-<option value="300000">Up to $300k</option>
-<option value="400000">Up to $400k</option>
-<option value="500000">Up to $500k</option>
-</select>
-<select id="bedrooms">
-<option value="">Any Bedrooms</option>
-<option value="2">2+</option>
-<option value="3">3+</option>
-<option value="4">4+</option>
-</select>
-<button onclick="searchHomes()">🔍 Search Properties</button>
-</div>
-</div>
-<div class="listings" id="listings"></div>
-</div>
-<footer>
-<p><strong>Wemert Group Realty</strong></p>
-<p>Email: jwemertgrouprealty1@gmail.com | Phone: 407-435-5072</p>
-<p>© 2026 Wemert Group Realty</p>
-</footer>
-<script>
-const homes=[
-{price:285000,bed:3,bath:2,sqft:1850,address:"123 Magnolia Ave",area:"Downtown Orlando",img:"https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1200&q=80"},
-{price:425000,bed:4,bath:3,sqft:2400,address:"456 Park Avenue",area:"Winter Park",img:"https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1200&q=80"},
-{price:245000,bed:3,bath:2,sqft:1700,address:"789 Celebration Blvd",area:"Celebration",img:"https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"},
-{price:310000,bed:4,bath:3,sqft:2100,address:"321 Lake Nona Dr",area:"Lake Nona",img:"https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80"},
-{price:195000,bed:2,bath:2,sqft:1200,address:"654 Pine St",area:"South Orlando",img:"https://images.unsplash.com/photo-1592595896616-c37162298647?auto=format&fit=crop&w=1200&q=80"},
-{price:360000,bed:4,bath:3,sqft:2300,address:"852 Avalon Rd",area:"East Orlando",img:"https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1200&q=80"}
+  <h1>Wemert Group Realty</h1>
+  <p>Affordable & Modern Homes Across Orlando, Florida</p>
+  <div class="contact-top">📞 407-435-5072 &nbsp;|&nbsp; ✉️ jwemertgrouprealty1@gmail.com</div>
+</header><div class="container">
+  <div class="search-box">
+    <h2>Search Properties</h2>
+    <div class="filters">
+      <select id="price">
+        <option value="">Any Price</option>
+        <option value="200000">Up to $200,000</option>
+        <option value="300000">Up to $300,000</option>
+        <option value="400000">Up to $400,000</option>
+        <option value="500000">Up to $500,000</option>
+      </select>
+      <select id="bedrooms">
+        <option value="">Any Bedrooms</option>
+        <option value="2">2+ Bedrooms</option>
+        <option value="3">3+ Bedrooms</option>
+        <option value="4">4+ Bedrooms</option>
+      </select>
+      <button onclick="searchHomes()">🔍 Search</button>
+    </div>
+  </div>  <div class="listings" id="listings"></div>
+</div><footer>
+  <p><strong>Wemert Group Realty</strong></p>
+  <p>Email: jwemertgrouprealty1@gmail.com | Phone: 407-435-5072</p>
+  <p>© 2026 Wemert Group Realty</p>
+</footer><script>
+// FIXED IMAGE URLS (GitHub Pages–safe)
+const images=[
+'https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1200&q=80',
+'https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1200&q=80',
+'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
+'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80',
+'https://images.unsplash.com/photo-1592595896616-c37162298647?auto=format&fit=crop&w=1200&q=80',
+'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1200&q=80'
 ];
-function render(list){const el=document.getElementById('listings');el.innerHTML='';list.forEach(h=>{el.innerHTML+=`
-<div class="card">
-<img src="${h.img}" alt="Orlando Home">
-<div class="card-content">
-<div class="price">$${h.price.toLocaleString()}</div>
-<div class="address">${h.address}</div>
-<div class="meta">🛏 ${h.bed} bd | 🛁 ${h.bath} ba | 📐 ${h.sqft} sqft</div>
-<div class="meta">📍 ${h.area}, FL</div>
-<div class="actions">
-<a class="details" href="mailto:jwemertgrouprealty1@gmail.com?subject=Details Request - ${h.address}">Details</a>
-<a class="call" href="tel:4074355072">Call</a>
-<a class="email" href="mailto:jwemertgrouprealty1@gmail.com?subject=Schedule Meeting - ${h.address}">📅 Schedule Meeting</a>
-</div>
-</div>
-</div>`})}
-function searchHomes(){const p=document.getElementById('price').value;const b=document.getElementById('bedrooms').value;render(homes.filter(h=>(!p||h.price<=p)&&(!b||h.bed>=b)))}
+
+const homes = Array.from({length:30},(_,i)=>(
+{
+  price:180000 + i*9000,
+  bed:(i%4)+2,
+  bath:(i%3)+1,
+  sqft:1200 + i*45,
+  address:`${100+i} Orlando Ave`,
+  area:'Orlando, FL',
+  img: images[i % images.length]
+}
+));
+
+function render(list){
+  const el=document.getElementById('listings');
+  el.innerHTML='';
+  list.forEach(h=>{
+    el.innerHTML+=`
+    <div class="card">
+      <img src="${h.img}" alt="Orlando Home">
+      <div class="card-content">
+        <div class="price">$${h.price.toLocaleString()}</div>
+        <div class="address">${h.address}</div>
+        <div class="meta">🛏 ${h.bed} bd &nbsp; 🛁 ${h.bath} ba &nbsp; 📐 ${h.sqft} sqft</div>
+        <div class="meta">📍 ${h.area}</div>
+        <div class="actions">
+          <a class="details" href="mailto:jwemertgrouprealty1@gmail.com?subject=Property Details - ${h.address}">View Details</a>
+          <a class="call" href="tel:4074355072">Call Agent</a>
+          <a class="meet" href="mailto:jwemertgrouprealty1@gmail.com?subject=Schedule Meeting - ${h.address}&body=Hello Wemert Group Realty,%0D%0AI would like to schedule a viewing.%0D%0APreferred date:%0D%0APreferred time:">📅 Schedule Meeting</a>
+        </div>
+      </div>
+    </div>`;
+  });
+}
+
+function searchHomes(){
+  const p=document.getElementById('price').value;
+  const b=document.getElementById('bedrooms').value;
+  render(homes.filter(h=>(!p||h.price<=p)&&(!b||h.bed>=b)));
+}
+
 render(homes);
-</script>
-</body>
+</script></body>
 </html>
