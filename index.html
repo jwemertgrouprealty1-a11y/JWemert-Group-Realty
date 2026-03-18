@@ -2,139 +2,115 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wemert Group Realty | Orlando Homes</title>  <style>
-    :root {
-      --primary: #0f2a44;
-      --accent: #2563eb;
-      --light: #f8fafc;
-      --dark: #020617;
-    }
-
-    * { box-sizing: border-box; }
-
+  <title>Wemert Group Realty</title>
+  <style>
     body {
       margin: 0;
-      font-family: "Segoe UI", Roboto, sans-serif;
-      background: var(--light);
-      color: var(--dark);
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f2f4f7;
     }
-
     header {
-      background: linear-gradient(135deg, var(--primary), #1e3a8a);
+      background: linear-gradient(135deg, #0a2a66, #123c8c);
       color: white;
-      padding: 40px 20px;
+      padding: 30px 20px;
       text-align: center;
     }
-
-    header h1 { margin: 0; font-size: 2.2rem; }
-    header p { opacity: 0.9; }
-
-    .container { padding: 20px; max-width: 1200px; margin: auto; }
-
+    .container {
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
     .search-box {
       background: white;
       padding: 20px;
-      border-radius: 14px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-      display: grid;
-      grid-template-columns: 1fr 1fr auto;
-      gap: 12px;
+      border-radius: 12px;
       margin-bottom: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
     }
-
-    .search-box input,
+    .search-box select,
     .search-box button {
-      padding: 14px;
+      padding: 12px;
       font-size: 16px;
-      border-radius: 10px;
-      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      border: 1px solid #ccc;
     }
-
     .search-box button {
-      background: var(--accent);
+      background-color: #0a2a66;
       color: white;
       border: none;
       cursor: pointer;
     }
-
     .listings {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 25px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
     }
-
     .card {
       background: white;
-      border-radius: 18px;
+      border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
       display: flex;
       flex-direction: column;
     }
-
     .card img {
       width: 100%;
-      height: 220px;
+      height: 200px;
       object-fit: cover;
     }
-
     .card-content {
-      padding: 18px;
+      padding: 15px;
       flex: 1;
     }
-
-    .price { font-size: 1.3rem; font-weight: bold; color: var(--accent); }
-
-    .details { opacity: 0.85; margin: 8px 0; }
-
-    .buttons {
-      display: grid;
-      gap: 10px;
-      padding: 18px;
+    .price {
+      font-size: 18px;
+      font-weight: bold;
+      color: #0a2a66;
+      margin: 10px 0;
     }
-
-    .btn {
+    .card button {
+      margin: 15px;
       padding: 12px;
-      text-align: center;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: 600;
+      background-color: #0a2a66;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
     }
-
-    .btn.call { background: #16a34a; color: white; }
-    .btn.email { background: #2563eb; color: white; }
-    .btn.meet { background: #4f46e5; color: white; }
-
     footer {
-      margin-top: 50px;
-      background: var(--primary);
+      background-color: #0a2a66;
       color: white;
       text-align: center;
-      padding: 30px 15px;
+      padding: 20px;
+      margin-top: 40px;
     }
-
-    @media(max-width: 700px) {
-      .search-box { grid-template-columns: 1fr; }
-    }
-  </style></head>
+  </style>
+</head>
 <body><header>
   <h1>Wemert Group Realty</h1>
-  <p>Affordable Homes Across Orlando, Florida</p>
+  <p>Modern Homes • Trusted Service • Orlando, Florida</p>
 </header><div class="container">  <div class="search-box">
-    <input type="number" id="price" placeholder="Max Price ($)" />
-    <input type="number" id="bedrooms" placeholder="Min Bedrooms" />
-    <button onclick="searchHomes()">Search Properties</button>
-  </div>  <div class="listings" id="listings"></div>
-</div><footer>
+    <select id="priceFilter">
+      <option value="">Select Max Price</option>
+      <option value="150000">Up to $150,000</option>
+      <option value="200000">Up to $200,000</option>
+      <option value="250000">Up to $250,000</option>
+      <option value="300000">Up to $300,000</option>
+      <option value="350000">Up to $350,000</option>
+    </select>
+    <button onclick="filterHomes()">Search Homes</button>
+  </div>  <div class="listings" id="listings"></div></div><footer>
   <p><strong>Wemert Group Realty</strong></p>
   <p>Email: jwemertgrouprealty1@gmail.com</p>
   <p>Phone: 407-435-5072</p>
 </footer><script>
-  const homes = Array.from({ length: 27 }, (_, i) => ({
-    price: 160000 + i * 12000,
-    bedrooms: (i % 4) + 2,
-    image: `https://source.unsplash.com/600x400/?house,orlando,home&sig=${i}`,
-    description: `${(i % 4) + 2} Bedroom Home – Orlando, FL`
+  const homes = Array.from({ length: 30 }, (_, i) => ({
+    price: 150000 + i * 5000,
+    description: `Beautiful ${2 + (i % 4)} Bedroom Home – Orlando Area`,
+    image: `https://source.unsplash.com/featured/?house,home,real-estate&sig=${i}`
   }));
 
   function displayHomes(list) {
@@ -144,31 +120,27 @@
     list.forEach(home => {
       listings.innerHTML += `
         <div class="card">
-          <img src="${home.image}" alt="Orlando Home">
+          <img src="${home.image}" alt="House image">
           <div class="card-content">
+            <p>${home.description}</p>
             <div class="price">$${home.price.toLocaleString()}</div>
-            <div class="details">${home.description}</div>
-            <div class="details">Bedrooms: ${home.bedrooms}</div>
           </div>
-          <div class="buttons">
-            <a class="btn call" href="tel:4074355072">📞 Call Agent</a>
-            <a class="btn email" href="mailto:jwemertgrouprealty1@gmail.com?subject=Property Inquiry&body=Hello Wemert Group Realty,%0D%0AI'm interested in this property.">📧 Email</a>
-            <a class="btn meet" href="mailto:jwemertgrouprealty1@gmail.com?subject=Schedule Property Viewing&body=Hello,%0D%0AI would like to schedule a meeting.%0D%0APreferred date:%0D%0APreferred time:">📅 Schedule Meeting</a>
-          </div>
-        </div>`;
+          <button onclick="contact()">Inquire / Schedule Viewing</button>
+        </div>
+      `;
     });
   }
 
-  function searchHomes() {
-    const maxPrice = document.getElementById("price").value;
-    const minBedrooms = document.getElementById("bedrooms").value;
-
-    const filtered = homes.filter(h =>
-      (!maxPrice || h.price <= maxPrice) &&
-      (!minBedrooms || h.bedrooms >= minBedrooms)
-    );
-
+  function filterHomes() {
+    const maxPrice = document.getElementById("priceFilter").value;
+    const filtered = maxPrice
+      ? homes.filter(h => h.price <= maxPrice)
+      : homes;
     displayHomes(filtered);
+  }
+
+  function contact() {
+    window.location.href = "mailto:jwemertgrouprealty1@gmail.com?subject=House Inquiry";
   }
 
   displayHomes(homes);
