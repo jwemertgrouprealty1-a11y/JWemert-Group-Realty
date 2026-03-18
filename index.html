@@ -1,241 +1,176 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wemert Group Realty</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wemert Group Realty | Orlando Homes</title>  <style>
+    :root {
+      --primary: #0f2a44;
+      --accent: #2563eb;
+      --light: #f8fafc;
+      --dark: #020617;
+    }
 
-<style>
-:root {
-  --primary: #1e3a8a;
-  --secondary: #f59e0b;
-  --accent: #10b981;
-  --bg: #f4f6f8;
-  --text: #1f2937;
-}
+    * { box-sizing: border-box; }
 
-* {
-  box-sizing: border-box;
-  font-family: "Segoe UI", system-ui, sans-serif;
-}
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Roboto, sans-serif;
+      background: var(--light);
+      color: var(--dark);
+    }
 
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-}
+    header {
+      background: linear-gradient(135deg, var(--primary), #1e3a8a);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
 
-/* HEADER */
-header {
-  background: linear-gradient(135deg, var(--primary), #2563eb);
-  color: white;
-  padding: 20px;
-  text-align: center;
-}
+    header h1 { margin: 0; font-size: 2.2rem; }
+    header p { opacity: 0.9; }
 
-header h1 {
-  margin: 0;
-  font-size: 26px;
-}
+    .container { padding: 20px; max-width: 1200px; margin: auto; }
 
-header p {
-  margin: 6px 0 0;
-  font-size: 14px;
-}
+    .search-box {
+      background: white;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 12px;
+      margin-bottom: 30px;
+    }
 
-/* SEARCH */
-.search-box {
-  background: white;
-  margin: -30px auto 20px;
-  padding: 20px;
-  max-width: 700px;
-  border-radius: 16px;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-}
+    .search-box input,
+    .search-box button {
+      padding: 14px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 1px solid #e5e7eb;
+    }
 
-.search-box select, 
-.search-box button {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 12px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  font-size: 15px;
-}
+    .search-box button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
 
-.search-box button {
-  background: var(--secondary);
-  color: white;
-  border: none;
-  font-weight: bold;
-}
+    .listings {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
 
-/* LISTINGS */
-.container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 15px;
-}
+    .card {
+      background: white;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+    }
 
-.card {
-  background: white;
-  border-radius: 18px;
-  overflow: hidden;
-  margin-bottom: 20px;
-  box-shadow: 0 12px 25px rgba(0,0,0,0.08);
-}
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
 
-.card img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-}
+    .card-content {
+      padding: 18px;
+      flex: 1;
+    }
 
-.card-body {
-  padding: 16px;
-}
+    .price { font-size: 1.3rem; font-weight: bold; color: var(--accent); }
 
-.price {
-  font-size: 22px;
-  color: var(--primary);
-  font-weight: bold;
-}
+    .details { opacity: 0.85; margin: 8px 0; }
 
-.address {
-  margin: 6px 0;
-  font-weight: 600;
-}
+    .buttons {
+      display: grid;
+      gap: 10px;
+      padding: 18px;
+    }
 
-.meta {
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 10px;
-}
+    .btn {
+      padding: 12px;
+      text-align: center;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+    }
 
-.buttons {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-}
+    .btn.call { background: #16a34a; color: white; }
+    .btn.email { background: #2563eb; color: white; }
+    .btn.meet { background: #4f46e5; color: white; }
 
-.buttons a {
-  flex: 1;
-  text-align: center;
-  padding: 12px;
-  border-radius: 12px;
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
-  font-size: 14px;
-}
+    footer {
+      margin-top: 50px;
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 30px 15px;
+    }
 
-.btn-details { background: var(--primary); }
-.btn-call { background: var(--secondary); }
-.btn-email {
-  background: var(--accent);
-  margin-top: 10px;
-  display: block;
-  text-align: center;
-  padding: 12px;
-  border-radius: 12px;
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-/* FOOTER */
-footer {
-  background: #111827;
-  color: white;
-  text-align: center;
-  padding: 20px;
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-}
-</style>
-</head>
-
-<body>
-
-<header>
+    @media(max-width: 700px) {
+      .search-box { grid-template-columns: 1fr; }
+    }
+  </style></head>
+<body><header>
   <h1>Wemert Group Realty</h1>
-  <p>Your Trusted Orlando Real Estate Partner</p>
-  <p>📞 407-435-5072 | ✉️ jwemertgrouprealty1@gmail.com</p>
-</header>
+  <p>Affordable Homes Across Orlando, Florida</p>
+</header><div class="container">  <div class="search-box">
+    <input type="number" id="price" placeholder="Max Price ($)" />
+    <input type="number" id="bedrooms" placeholder="Min Bedrooms" />
+    <button onclick="searchHomes()">Search Properties</button>
+  </div>  <div class="listings" id="listings"></div>
+</div><footer>
+  <p><strong>Wemert Group Realty</strong></p>
+  <p>Email: jwemertgrouprealty1@gmail.com</p>
+  <p>Phone: 407-435-5072</p>
+</footer><script>
+  const homes = Array.from({ length: 27 }, (_, i) => ({
+    price: 160000 + i * 12000,
+    bedrooms: (i % 4) + 2,
+    image: `https://source.unsplash.com/600x400/?house,orlando,home&sig=${i}`,
+    description: `${(i % 4) + 2} Bedroom Home – Orlando, FL`
+  }));
 
-<div class="search-box">
-  <select>
-    <option>All Orlando Areas</option>
-    <option>Downtown Orlando</option>
-    <option>Winter Park</option>
-    <option>Lake Nona</option>
-  </select>
+  function displayHomes(list) {
+    const listings = document.getElementById("listings");
+    listings.innerHTML = "";
 
-  <select>
-    <option>Any Price</option>
-    <option>Under $300,000</option>
-    <option>$300,000 - $500,000</option>
-  </select>
+    list.forEach(home => {
+      listings.innerHTML += `
+        <div class="card">
+          <img src="${home.image}" alt="Orlando Home">
+          <div class="card-content">
+            <div class="price">$${home.price.toLocaleString()}</div>
+            <div class="details">${home.description}</div>
+            <div class="details">Bedrooms: ${home.bedrooms}</div>
+          </div>
+          <div class="buttons">
+            <a class="btn call" href="tel:4074355072">📞 Call Agent</a>
+            <a class="btn email" href="mailto:jwemertgrouprealty1@gmail.com?subject=Property Inquiry&body=Hello Wemert Group Realty,%0D%0AI'm interested in this property.">📧 Email</a>
+            <a class="btn meet" href="mailto:jwemertgrouprealty1@gmail.com?subject=Schedule Property Viewing&body=Hello,%0D%0AI would like to schedule a meeting.%0D%0APreferred date:%0D%0APreferred time:">📅 Schedule Meeting</a>
+          </div>
+        </div>`;
+    });
+  }
 
-  <select>
-    <option>Any Bedrooms</option>
-    <option>2 Bedrooms</option>
-    <option>3 Bedrooms</option>
-    <option>4+ Bedrooms</option>
-  </select>
+  function searchHomes() {
+    const maxPrice = document.getElementById("price").value;
+    const minBedrooms = document.getElementById("bedrooms").value;
 
-  <button>🔍 Search Properties</button>
-</div>
+    const filtered = homes.filter(h =>
+      (!maxPrice || h.price <= maxPrice) &&
+      (!minBedrooms || h.bedrooms >= minBedrooms)
+    );
 
-<div class="container grid">
+    displayHomes(filtered);
+  }
 
-  <!-- HOUSE 1 -->
-  <div class="card">
-    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Orlando Home">
-    <div class="card-body">
-      <div class="price">$285,000</div>
-      <div class="address">123 Magnolia Ave – Downtown Orlando</div>
-      <div class="meta">3 Bed • 2 Bath • 1,850 sqft</div>
-      <div class="buttons">
-        <a class="btn-details" href="#">Details</a>
-        <a class="btn-call" href="tel:4074355072">Call</a>
-      </div>
-      <a class="btn-email" href="mailto:jwemertgrouprealty1@gmail.com?subject=Home Inquiry">
-        📧 Email About This Home
-      </a>
-    </div>
-  </div>
-
-  <!-- HOUSE 2 -->
-  <div class="card">
-    <img src="https://images.unsplash.com/photo-1572120360610-d971b9b78826" alt="Winter Park Home">
-    <div class="card-body">
-      <div class="price">$425,000</div>
-      <div class="address">456 Park Avenue – Winter Park</div>
-      <div class="meta">4 Bed • 3 Bath • 2,400 sqft</div>
-      <div class="buttons">
-        <a class="btn-details" href="#">Details</a>
-        <a class="btn-call" href="tel:4074355072">Call</a>
-      </div>
-      <a class="btn-email" href="mailto:jwemertgrouprealty1@gmail.com?subject=Home Inquiry">
-        📧 Email About This Home
-      </a>
-    </div>
-  </div>
-
-</div>
-
-<footer>
-  © 2026 Wemert Group Realty • Orlando, FL<br>
-  Email: jwemertgrouprealty1@gmail.com | Phone: 407-435-5072
-</footer>
-
-</body>
+  displayHomes(homes);
+</script></body>
 </html>
